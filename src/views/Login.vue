@@ -69,7 +69,7 @@
               } else {
                 this.generateRoutes({router:this.$router.options.routes,role:data.role});
                 sessionStorage.setItem('user', JSON.stringify(data));
-                this.$router.push({ path: '/table' });
+                this.$router.push({ path: '/main' });
               }
             });
           } else {

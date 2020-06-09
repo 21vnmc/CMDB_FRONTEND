@@ -2,10 +2,12 @@ import babelpolyfill from 'babel-polyfill'
 import Vue from 'vue'
 import App from './App'
 import ElementUI from 'element-ui'
+import Moment from 'moment'
 
+Vue.prototype.moment = Moment
 // 1.全局css样式
-import 'element-ui/lib/theme-default/index.css'
-//import './assets/theme/theme-green/index.css'
+import 'element-ui/lib/theme-chalk/index.css'
+//import './asset/theme/theme-green/index.css'
 
 // 2.导入vue-router
 import VueRouter from 'vue-router'

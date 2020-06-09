@@ -12,8 +12,10 @@
   "dependencies": {
     "axios": "^0.15.3",
     "echarts": "^3.3.2",
-    "element-ui": "^1.2.8",
+    "element-ui": "^2.4.10",
+    "element-ui-table-span-method": "^1.0.13",
     "font-awesome": "^4.7.0",
+    "moment": "^2.26.0",
     "nprogress": "^0.2.0",
     "vue": "^2.2.2",
     "vue-router": "^2.3.0",

@@ -1,5 +1,5 @@
 const formatTime = date => {
-    var newDate = new Date();
+    let newDate = new Date();
     newDate.setTime(date * 1000);
     const year = newDate.getFullYear()
     const month = newDate.getMonth() + 1

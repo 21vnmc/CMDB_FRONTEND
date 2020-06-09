@@ -47,6 +47,26 @@ export const modelList = ({commit},{model_list}) => {
     commit('SET_MODELS',model_list);
 }
 
-export const agentList = ({commit},{agent_list}) => {
-    commit('SET_AGENTS',agent_list);
+export const manufacturerList = ({commit},{manufacturer_list}) => {
+    commit('SET_MANUFACTURERS',manufacturer_list);
+}
+
+export const deviceInfo = ({commit},{device_info}) => {
+    commit('SET_DEVICE_INFO',device_info);
+}
+
+export const costCenterList = ({commit},{cost_center_list}) => {
+    commit('SET_COST_CENTERS',cost_center_list);
+}
+
+export const companyList = ({commit},{company_list}) => {
+    commit('SET_COMPANIES',company_list);
+}
+
+export const assetNameList = ({commit},{asset_name_list}) => {
+    commit('SET_ASSET_NAMES',asset_name_list);
+}
+
+export const unitSizeList = ({commit},{unit_size_list}) => {
+    commit('SET_UNIT_SIZES',unit_size_list);
 }

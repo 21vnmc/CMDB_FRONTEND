@@ -23,9 +23,8 @@
 		<el-col :span="24" class="main">
 			<aside :class="collapsed?'menu-collapsed':'menu-expanded'">
 				<!--导航菜单-->
-				<el-menu  id="elmenu" :default-active="$route.path" class="el-menu-vertical-demo" @open="handleopen" @close="handleclose" @select="handleselect"
+				<el-menu id="elmenu" :default-active="onRoutes" class="el-menu-vertical-demo" @open="handleopen" @close="handleclose" @select="handleselect"
 					 unique-opened router v-show="!collapsed">
-<!--					<template v-for="(item,index) in $router.options.routes" v-if="!item.hidden">-->
 					<template v-for="(item,index) in getPermissionRoutes" v-if="!item.hidden">
 						<el-submenu :index="index+''" v-if="!item.leaf">
 							<template slot="title"><i :class="item.iconCls"></i>{{item.name}}</template>
@@ -137,7 +136,33 @@
 			...mapGetters([
 			  'getPermissionRoutes'
 			  // ...
-			])
+			]),
+			onRoutes(){
+                // this.$route.path
+                // debugger
+				//
+				// console.log(this.$route.path,1);
+                // if(this.$route.path.replace('/','')=='ProductEdit'){
+                //    return 'Product';
+                // }
+                // else if(this.$route.path.replace('/','')=='dataCenterInfo'){
+                // 	console.log(123456)
+                //     return 'xxx'
+                // }
+                // else{
+                // 	console.log(this.$route.path.replace('/',''),1111111)
+                //     return this.$route.path.replace('/','');
+                // }
+				if(this.$route.path == '/dataCenterInfo'){
+					return '/dataCenter'
+				}else if(this.$route.path == '/apartmentInfo'){
+					return '/apartment'
+				}else if(this.$route.path == '/rackDetail'){
+					return '/rack'
+				} else{
+					return this.$route.path;
+				}
+            },
 		},
 		mounted() {
 			var res = sessionStorage.getItem('user');

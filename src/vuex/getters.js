@@ -35,6 +35,30 @@ export const getModelList = state => {
     return state.modelList;
 }
 
-export const getAgentList = state => {
-    return state.agentList;
+export const getManufacturerList = state => {
+    return state.manufacturerList;
+}
+
+export const getDeviceInfo = state => {
+    return state.deviceInfo;
+}
+
+export const getCostCenterList = state => {
+    return state.costCenterList;
+}
+
+export const getCompanyList = state => {
+    return state.companyList;
+}
+
+
+export const getAssetNameList = state => {
+    return state.assetNameList;
+}
+
+
+export const getUnitSizeList = state => {
+
+    console.log(state.unitSizeList,123)
+    return state.unitSizeList;
 }

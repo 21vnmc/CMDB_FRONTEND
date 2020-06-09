@@ -52,7 +52,7 @@
 				form: {
 					name: '',
 					region: '',
-					date1: '',
+					date1: '2020-01-26',
 					date2: '',
 					delivery: false,
 					type: [],
