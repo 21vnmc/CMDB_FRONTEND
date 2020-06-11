@@ -28,9 +28,6 @@
 <!--            </el-table-column>-->
             <el-table-column prop="name" label="机柜名称" width="250" sortable>
                 <template slot-scope="scope">
-<!--                    <div style="color:blueviolet;cursor:pointer;" @click="getDetail(scope.row.id)">{{-->
-<!--                        scope.row.name }}-->
-<!--                    </div>-->
                     <router-link :to="{ name: 'rack_detail', query: { r_id: scope.row.id } }" target="_self">
                         {{scope.row.name != null ? scope.row.name : '空'}}
                     </router-link>
@@ -642,6 +639,14 @@
 
     .text-wrapper {
       white-space: pre-wrap;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    .router-link-active {
+        text-decoration: none;
     }
 
 </style>

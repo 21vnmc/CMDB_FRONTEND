@@ -1,67 +1,67 @@
 <template>
-  <el-table
-    :data="asset_info_list"
-    style="width: 100%"
-    :row-class-name="tableRowClassName">
-    <el-table-column
-      prop="Column_key"
-      label="字段"
-      width="180">
-    </el-table-column>
-    <el-table-column
-      prop="Column_value"
-      label="数值"
-      width="580">
-    </el-table-column>
-  </el-table>
+        <div>
+            <section>
+                <table style="border:thin dashed darkgray;width:100%">
+                    <thead>
+                    <th></th>
+                    <th height="32px" style=" font-size:25px;padding-right: 150px" >汇总</th>
+                    </thead>
+                    <tbody style="border:thin solid darkgray;">
+                    <template v-for="(val,key,index) in assetInfo">
+                        <tr>
+                            <td align="right" style="font-weight:bold">{{key}}:</td>
+                            <td align="left" v-if="key==='设备状态' && val=='在用'" style="color:#00FFFF">{{val}}</td>
+                            <td align="left" v-else-if="key==='设备状态' && val=='闲置'" style="color:red">{{val}}</td>
+                            <td align="left" v-else-if="key==='设备状态' && val=='已处置-报废'" style="color:#C80D4F82">{{val}}</td>
+                            <td align="left" v-else>{{val}}</td>
+                        </tr>
+                    </template>
+                    </tbody>
+                </table>
+
+            </section>
+        </div>
+
+
 </template>
-
-<style>
-  .el-table .warning-row {
-    background: oldlace;
-  }
-
-  .el-table .success-row {
-    background: #f0f9eb;
-  }
-</style>
 <script>
-  import {getAssetInfoApi} from "../../api/api";
-  export default {
-    methods: {
-      getAssetNode(asset_id){
-        let para = {asset_id:asset_id};
-        getAssetInfoApi(para).then((res) => {
-            this.asset_info_object = res.data.data;
-            console.log(this.asset_info_object);
-            this.handleObject(this.asset_info_object);
-        });
+    import {getAssetInfoApi} from "../../api/api";
 
-      },
-      tableRowClassName({row, rowIndex}) {
-        if (rowIndex === 1) {
-          return 'warning-row';
-        } else if (rowIndex === 3) {
-          return 'success-row';
-        }
-        return '';
-      },
-      handleObject(asset_info_object){
-        for(let key in asset_info_object){
-          this.asset_info_list.push({'Column_key':key,'Column_value':asset_info_object[key]});
-        }
-      }
-    },
-    data() {
-      return {
-        asset_info_list :[],
-        asset_info_object:null,
-      }
-    },
+    export default {
+        data() {
+            return {
+                assetInfo:null,
+            };
+        },
+        methods: {
+            getAssetInfo(para){
+                 getAssetInfoApi(para).then((res) => {
+                    this.assetInfo = res.data.data;
+                });
 
-    mounted() {
-			let asset_id = this.$route.query.id;
-            this.getAssetNode(asset_id);
-		},
-  }
+            },
+        },
+        mounted() {
+            this.getAssetInfo(this.$route.query);
+        },
+    };
 </script>
+<style scoped>
+    thead th {
+        text-align: center;
+    }
+    td {
+    border: none;
+}
+
+    .left-table th,.left-table  td {
+        /*padding-left: 20px;*/
+        border: 1px solid #e9eaec;
+        line-height: 15px;
+        text-align: center;
+    }
+
+    .right-table {
+        border-bottom: #333 1px dashed;
+    }
+</style>

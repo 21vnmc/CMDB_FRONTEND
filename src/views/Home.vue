@@ -159,7 +159,11 @@
 					return '/apartment'
 				}else if(this.$route.path == '/rackDetail'){
 					return '/rack'
-				} else{
+				}else if(this.$route.path == '/deviceInfo'){
+					return '/device'
+				}else if(this.$route.path == '/assetInfo'){
+					return '/asset'
+				}else{
 					return this.$route.path;
 				}
             },

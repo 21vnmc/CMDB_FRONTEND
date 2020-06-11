@@ -10,6 +10,28 @@
 					<el-input v-model="filters.asset_serial" placeholder="sn号码"></el-input>
 				</el-form-item>
 				<el-form-item >
+					<el-select filterable v-model="filters.query_field" placeholder="搜索字段"
+					@change="changeQueryItem"
+					>
+					<el-option
+					  v-for="item in query_fields"
+					  :key="item.query_object"
+					  :label="item.name"
+					  :value="item.query_object">
+					</el-option>
+				  </el-select>
+					</el-form-item>
+				<el-form-item >
+					<el-select filterable v-model="filters.field_value" placeholder="字段数值">
+					<el-option
+					  v-for="item in field_values"
+					  :key="item.id"
+					  :label="item.name"
+					  :value="item.id">
+					</el-option>
+				  </el-select>
+					</el-form-item>
+				<el-form-item >
 					<el-select v-model="filters.company_id" placeholder="公司名称">
 					<el-option
 					  v-for="item in getCompanyList"
@@ -47,13 +69,20 @@
 			</el-table-column>
 <!--			<el-table-column type="index" width="30">-->
 <!--			</el-table-column>-->
-			<el-table-column prop="via_serial" label="资产编号" width="180" sortable>
-			</el-table-column>
-			<el-table-column prop="asset_serial" label="设备编号" width="220" sortable>
+			<el-table-column prop="via_serial" label="资产编号" width="120" sortable>
 				<template slot-scope="scope">
-					{{scope.row.asset_serial != null ? scope.row.asset_serial:'空' }}
+					<router-link :to="{ name: 'asset_info', query: { asset_id: scope.row.id } }" target="_self">
+						{{scope.row.via_serial != null ? scope.row.via_serial : '空'}}
+					</router-link>
 				</template>
 			</el-table-column>
+			<el-table-column prop="asset_name" label="资产名称" width="100" sortable>
+			</el-table-column>
+<!--			<el-table-column prop="asset_serial" label="设备编号" width="220" sortable>-->
+<!--				<template slot-scope="scope">-->
+<!--					{{scope.row.asset_serial != null ? scope.row.asset_serial:'空' }}-->
+<!--				</template>-->
+<!--			</el-table-column>-->
 			<el-table-column prop="asset_status" label="设备状态" width="120" sortable>
 			</el-table-column>
 			<el-table-column prop="data_center_name/apart_name/rack_name" label="数据中心/机房/机柜" width="350" sortable>
@@ -61,6 +90,14 @@
 					{{scope.row.data_center_name}} /{{scope.row.apart_name != null ? scope.row.apart_name:'空' }}
 					 /{{scope.row.rack_name  == null ? "空":scope.row.apart_name }}
 
+				</template>
+			</el-table-column>
+
+			<el-table-column prop="relation_device" label="关联设备" width="120" sortable>
+				<template slot-scope="scope" v-if="scope.row.relation_device">
+					<router-link :to="{ name: 'device_info', query: { device_id: scope.row.relation_device,rack_id:scope.row.relation_device_rack_id} }" target="_self">
+						关联设备
+					</router-link>
 				</template>
 			</el-table-column>
 
@@ -564,6 +601,12 @@
 	export default {
 		data() {
 			return {
+				field_values:[],
+				query_fields:[
+					{query_object:'asset_name',name:'资产名称'},
+					{query_object:'department',name:'归属部门'},
+					{query_object:'company',name:'公司名称'},
+				],
 				optionProps:{
 					label: 'name',
 					value: 'id',
@@ -696,6 +739,14 @@
 			}
 		},
 		methods: {
+			changeQueryItem(val){
+				let para = {database_name:val}
+				queryDataBaseApi(para).then((res) => {
+					// this.filters.field_value = null;
+					this.field_values = res.data.data;
+				});
+
+			},
 			changeAreaItem(val){
 				this.editForm.data_center_id = null;
 				this.editForm.apartment_id = null;
@@ -1203,6 +1254,10 @@
 				row.manufacturer_model = manufacturer_model;
 				row.recipient_info = recipient_info;
 				row.cost_info = cost_info;
+				if (row.relation_device){
+					delete row.relation_device;
+					delete row.relation_device_rack_id;
+				}
 				this.editForm = Object.assign({}, row);
 				this.origin_editForm = JSON.parse(JSON.stringify(this.editForm));
 			},
@@ -1231,7 +1286,6 @@
 							let editForm_object = Object.assign({}, this.editForm);
 							let count = 0;
 							let new_value_object = {id:editForm_object.id};
-
 
 							for(let key in editForm_object){
 								let flag;
@@ -1411,5 +1465,11 @@
        .customWidth{
         width:80%;
     }
+	    a {
+        text-decoration: none;
+    }
 
+    .router-link-active {
+        text-decoration: none;
+    }
 </style>

@@ -409,4 +409,12 @@
         width: 80%;
     }
 
+    a {
+        text-decoration: none;
+    }
+
+    .router-link-active {
+        text-decoration: none;
+    }
+
 </style>

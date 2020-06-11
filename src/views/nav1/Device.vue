@@ -13,19 +13,21 @@
 					<el-input v-model="filters.via_num" placeholder="资产编号"></el-input>
 				</el-form-item>
 				<el-form-item >
-					<el-select v-model="filters.product_id" placeholder="产品类型">
+					<el-select filterable v-model="filters.query_field" placeholder="产品类型"
+					@change="changeQueryItem"
+					>
 					<el-option
-					  v-for="item in getProductList"
-					  :key="item.id"
+					  v-for="item in query_fields"
+					  :key="item.query_object"
 					  :label="item.name"
-					  :value="item.id">
+					  :value="item.query_object">
 					</el-option>
 				  </el-select>
 					</el-form-item>
 				<el-form-item >
-					<el-select v-model="filters.device_type_id" placeholder="硬件类型">
+					<el-select filterable v-model="filters.field_value" placeholder="硬件类型">
 					<el-option
-					  v-for="item in getDeviceTypeList"
+					  v-for="item in field_values"
 					  :key="item.id"
 					  :label="item.name"
 					  :value="item.id">
@@ -49,9 +51,12 @@
 		<el-table :data="pageDevices" highlight-current-row v-loading="listLoading" @selection-change="selsChange" style="width: 100%;">
 			<el-table-column type="selection" width="35">
 			</el-table-column>
-<!--			<el-table-column type="index" width="55">-->
-<!--			</el-table-column>-->
 			<el-table-column prop="name" label="设备名称" width="180" sortable>
+				<template slot-scope="scope">
+					<router-link :to="{ name: 'device_info', query: { rack_id: scope.row.rack_id,device_id: scope.row.id } }" target="_self">
+						{{scope.row.name != null ? scope.row.name : '空'}}
+					</router-link>
+				</template>
 			</el-table-column>
 			<el-table-column prop="ip_addr" label="ip地址" width="150" sortable>
 			</el-table-column>
@@ -439,7 +444,6 @@
 					</el-cascader>
 				</el-form-item>
 
-
 			</el-form>
 			<div slot="footer" class="dialog-footer">
 				<el-button @click.native="addFormVisible = false">取消</el-button>
@@ -466,6 +470,12 @@
 	export default {
 		data() {
 			return {
+				query_fields:[
+					{query_object:'product',name:'产品类型'},
+					{query_object:'department',name:'归属部门'},
+					{query_object:'device_type',name:'设备类型'},
+				],
+				field_values:[],
 				optionProps:{
 					label: 'name',
 					value: 'id',
@@ -569,6 +579,14 @@
 			}
 		},
 		methods: {
+			changeQueryItem(val){
+				let para = {database_name:val}
+				queryDataBaseApi(para).then((res) => {
+					// this.filters.field_value = null;
+					this.field_values = res.data.data;
+				});
+
+			},
 			changeAreaItem(val){
 				this.editForm.data_center_id = null;
 				this.editForm.apartment_id = null;
@@ -870,12 +888,12 @@
 			},
 			//获取资产列表
 			getDevices(pageNumber=1,pageSize=10,filterRule=this.filters) {
+
 				let para = {
 					pageNumber: pageNumber,
 					pageSize: pageSize,
 					filterRule: filterRule,
 				};
-				// let ret_list = [];
 				this.listLoading = true;
 				//NProgress.start();
 				getDeviceListApi(para).then((res) => {
@@ -1139,6 +1157,14 @@
 <style scoped>
        .customWidth{
         width:80%;
+    }
+
+	    a {
+        text-decoration: none;
+    }
+
+    .router-link-active {
+        text-decoration: none;
     }
 
 </style>

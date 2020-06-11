@@ -3,7 +3,6 @@ import NotFound from './views/404.vue'
 import Home from './views/Home.vue'
 import Main from './views/Main.vue'
 import Device from './views/nav1/Device.vue'
-import DeviceInfo from './views/nav1/DeviceInfo.vue'
 import AssetInfo from './views/nav1/AssetInfo.vue'
 import DataCenterInfo from './views/nav2/DataCenterInfo.vue'
 import ApartInfo from './views/nav2/ApartInfo.vue'
@@ -12,7 +11,6 @@ import RackInfo from './views/nav2/RackInfo.vue'
 import RackDetail from './views/nav2/RackDetail.vue'
 import RackDeviceInfo from './views/nav2/RackDeviceInfo.vue'
 import Asset from './views/nav1/Asset.vue'
-import Form from './views/nav1/Form.vue'
 import user from './views/nav1/user.vue'
 import DataCenter from './views/nav2/DataCenter.vue'
 import Apartment from './views/nav2/Apartment.vue'
@@ -21,6 +19,7 @@ import Page6 from './views/nav3/Page6.vue'
 import echarts from './views/charts/echarts.vue'
 import User from './views/nav3/User.vue'
 import Group from './views/nav3/Group.vue'
+import DeviceInfo from "./views/nav1/DeviceInfo";
 
 let routes = [
     {
@@ -40,24 +39,6 @@ let routes = [
         meta:{
             roles:['admin','user']
         }
-    },
-     {
-        path: '/deviceInfo',
-        component: DeviceInfo,
-        name: '',
-        meta:{
-            roles:['admin','user']
-        },
-         hidden: true
-    },
-    {
-        path: '/assetInfo',
-        component: AssetInfo,
-        name: '',
-        meta:{
-            roles:['admin','user']
-        },
-         hidden: true
     },
 
     {
@@ -87,8 +68,6 @@ let routes = [
         },
          hidden: true
     },
-
-
      {
         path: '/',
         component: Home,
@@ -110,9 +89,25 @@ let routes = [
         children: [
             // { path: '/main', component: Main, name: '主页' },
             { path: '/device', component: Device, name: '设备管理' },
+            {
+                path: '/deviceInfo',
+                component: DeviceInfo,
+                name: 'device_info',
+                meta: {
+                    roles: ['admin', 'user']
+                },
+                hidden: true
+            },
             { path: '/asset', component: Asset, name: '台账管理' },
-            // { path: '/form', component: Form, name: 'Form' },
-            // { path: '/user', component: user, name: '列表' },
+            {
+                path: '/assetInfo',
+                component: AssetInfo,
+                name: 'asset_info',
+                meta: {
+                    roles: ['admin', 'user']
+                },
+                hidden: true
+            },
         ],
         meta:{
             roles:['admin']

@@ -7,6 +7,16 @@
 				<el-form-item>
 					<el-input v-model="filters.username" placeholder="用户名"></el-input>
 				</el-form-item>
+
+				<el-select filterable v-model="filters.department_id" placeholder="公司名称">
+					<el-option
+					  v-for="item in department_list"
+					  :key="item.id"
+					  :label="item.name"
+					  :value="item.id">
+					</el-option>
+				  </el-select>
+
 				<el-form-item>
 					<el-button type="primary" size="small" v-on:click="getFilterUsers(filters)">查询</el-button>
 				</el-form-item>
@@ -32,6 +42,11 @@
                     prop="email"
                     label="邮箱"
                     width="180">
+            </el-table-column>
+			<el-table-column
+                    prop="department_name"
+                    label="部门"
+                    width="280">
             </el-table-column>
             <el-table-column
                     prop="role_name"
@@ -96,7 +111,21 @@
 							</el-select>
 						</el-form-item>
 					</el-col>
+				</el-row>
 
+				<el-row :gutter="20">
+					<el-col :span="12">
+						<el-form-item label="部门">
+							<el-select filterable v-model="editForm.department_id" placeholder="请选择">
+								<el-option
+										v-for="item in department_list"
+										:key="item.id"
+										:label="item.name?item.name:'空'"
+										:value="item.id">
+								</el-option>
+							</el-select>
+						</el-form-item>
+					</el-col>
 				</el-row>
 
 			</el-form>
@@ -153,7 +182,21 @@
 							</el-select>
 						</el-form-item>
 					</el-col>
+				</el-row>
 
+				<el-row :gutter="20">
+					<el-col :span="12">
+						<el-form-item label="部门">
+							<el-select filterable v-model="addForm.department_id" placeholder="请选择">
+								<el-option
+										v-for="item in department_list"
+										:key="item.id"
+										:label="item.name?item.name:'空'"
+										:value="item.id">
+								</el-option>
+							</el-select>
+						</el-form-item>
+					</el-col>
 				</el-row>
 		   </el-form>
 			<div slot="footer" class="dialog-footer">
@@ -195,6 +238,7 @@
             return {
                 filters: {
 				},
+				department_list:[],
                 editFormVisible: false,//编辑界面是否显示
                 editLoading: false,
                 addFormVisible:false,
@@ -442,6 +486,12 @@
             handleAdd:function(){
             	this.addFormVisible = true;
 			},
+			getDepartments() {
+				let para = {database_name:'department'}
+				queryDataBaseApi(para).then((res) => {
+					this.department_list = res.data.data;
+				});
+			},
             //批量删除
 			batchRemove: function () {
 				let ids = this.sels.map(item => item.username_id).toString();
@@ -468,6 +518,7 @@
         mounted() {
             this.getUsers();
             this.getGroups();
+            this.getDepartments();
         }
     }
 </script>

@@ -51,7 +51,7 @@ export const getRackInfoApi = params => { return axios.get(`${base}/api/rack/get
 export const getApartmentInfoApi = params => { return axios.get(`${base}/api/apart/getApartmentInfo`, { params: params }); };
 export const getRackDeviceInfoApi = params => { return axios.get(`${base}/api/rack/getRackDeviceInfo`, { params: params }); };
 export const getApartInfoApi = params => { return axios.get(`${base}/api/rack/getApartInfo`, { params: params }); };
-export const getDataCenterInfoApi = params => { return axios.get(`${base}/api/rack/getDataCenterInfo`, { params: params }); };
+export const getDataCenterInfoApi = params => { return axios.get(`${base}/api/dc/getDataCenterInfo`, { params: params }); };
 export const getAssetInfoApi = params => { return axios.get(`${base}/api/asset/getAssetInfo`, { params: params }); };
 
 export const getDeviceTypeListApi = params => { return axios.get(`${base}/api/asset/deviceTypeList`, { params: params }); };
