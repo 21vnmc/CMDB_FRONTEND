@@ -1,16 +1,16 @@
 <template>
   <el-table
-    :data="apart_info_list"
+    :data="data_center_info_list"
     style="width: 100%"
-    >
+    :row-class-name="tableRowClassName">
     <el-table-column
       prop="Column_key"
-      label="数据中心"
-      width="280">
+      label="字段"
+      width="180">
     </el-table-column>
     <el-table-column
       prop="Column_value"
-      label="机房名称"
+      label="数值"
       width="580">
     </el-table-column>
   </el-table>
@@ -26,12 +26,12 @@
   }
 </style>
 <script>
-  import {getApartInfoApi} from "../../api/api";
+  import {getDataCenterInfoApi} from "../../api/api";
   export default {
     methods: {
-      getApartNode(d_id){
+      getDataCenterNode(d_id){
         let para = {d_id:d_id};
-        getApartInfoApi(para).then((res) => {
+        getDataCenterInfoApi(para).then((res) => {
             this.data_center_info_object = res.data.data;
             console.log(this.data_center_info_object);
             this.handleObject(this.data_center_info_object);
@@ -48,22 +48,20 @@
       },
       handleObject(data_center_info_object){
         for(let key in data_center_info_object){
-          this.apart_info_list.push({'Column_key':this.d_name,'Column_value':data_center_info_object[key]});
+          this.data_center_info_list.push({'Column_key':key,'Column_value':data_center_info_object[key]});
         }
       }
     },
     data() {
       return {
-        apart_info_list :[],
-        apart_info_object:null,
-        d_name:'',
+        data_center_info_list :[],
+        data_center_info_object:null,
       }
     },
 
     mounted() {
 			let d_id = this.$route.query.d_id;
-			this.d_name = this.$route.query.d_name;
-            this.getApartNode(d_id);
+            this.getDataCenterNode(d_id);
 		},
   }
 </script>

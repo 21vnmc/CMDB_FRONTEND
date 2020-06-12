@@ -2,7 +2,7 @@
   <el-table
     :data="device_info_list"
     style="width: 100%"
-    :row-class-name="tableRowClassName">
+    >
     <el-table-column
       prop="device_name"
       label="设备名称"

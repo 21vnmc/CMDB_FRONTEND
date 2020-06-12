@@ -28,7 +28,7 @@
 <!--            </el-table-column>-->
             <el-table-column prop="name" label="机柜名称" width="250" sortable>
                 <template slot-scope="scope">
-                    <router-link :to="{ name: 'rack_detail', query: { r_id: scope.row.id } }" target="_self">
+                    <router-link :to="{ name: 'rack_detail', query: { rack_id: scope.row.id } }" target="_self">
                         {{scope.row.name != null ? scope.row.name : '空'}}
                     </router-link>
                 </template>

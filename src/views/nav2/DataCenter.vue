@@ -321,7 +321,6 @@
                 let para = {database_name:'room_type'}
 				queryDataBaseApi(para).then((res) => {
                     this.roomTypeList = res.data.data;
-                    console.log(this.roomTypeList,123);
                 }, error => {
                     console.log(error)
                 })

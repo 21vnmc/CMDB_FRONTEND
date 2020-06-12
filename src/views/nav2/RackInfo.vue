@@ -2,7 +2,7 @@
   <el-table
     :data="rack_info_list"
     style="width: 100%"
-    :row-class-name="tableRowClassName">
+    >
     <el-table-column
       prop="rack_name"
       label="机柜名称"

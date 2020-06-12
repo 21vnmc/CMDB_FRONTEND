@@ -81,7 +81,7 @@
 
             getRackDetailNode(para) {
                 getRackDetailApi(para).then((res) => {
-                    this.tableData = res.data.data;
+                    this.tableData = res.data.data.rack_position_info;
                 });
 
             },

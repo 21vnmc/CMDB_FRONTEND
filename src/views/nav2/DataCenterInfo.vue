@@ -1,67 +1,58 @@
 <template>
-  <el-table
-    :data="data_center_info_list"
-    style="width: 100%"
-    :row-class-name="tableRowClassName">
-    <el-table-column
-      prop="Column_key"
-      label="字段"
-      width="180">
-    </el-table-column>
-    <el-table-column
-      prop="Column_value"
-      label="数值"
-      width="580">
-    </el-table-column>
-  </el-table>
+        <div>
+            <section>
+                <table style="border:thin dashed darkgray;width:60%">
+                    <thead>
+                    <th></th>
+                    <th height="32px" style="font-size:25px;text-align: left" >详情</th>
+                    </thead>
+                    <tbody style="border:thin solid darkgray;">
+                    <template v-for="(val,key,index) in dataCenterInfo">
+                        <tr>
+                            <td align="right" style="font-weight:bold">{{key}}:</td>
+                            <td align="left">{{val}}</td>
+                        </tr>
+                    </template>
+                    </tbody>
+                </table>
+            </section>
+        </div>
 </template>
-
-<style>
-  .el-table .warning-row {
-    background: oldlace;
-  }
-
-  .el-table .success-row {
-    background: #f0f9eb;
-  }
-</style>
 <script>
   import {getDataCenterInfoApi} from "../../api/api";
-  export default {
-    methods: {
-      getDataCenterNode(d_id){
-        let para = {d_id:d_id};
-        getDataCenterInfoApi(para).then((res) => {
-            this.data_center_info_object = res.data.data;
-            console.log(this.data_center_info_object);
-            this.handleObject(this.data_center_info_object);
-        });
 
-      },
-      tableRowClassName({row, rowIndex}) {
-        if (rowIndex === 1) {
-          return 'warning-row';
-        } else if (rowIndex === 3) {
-          return 'success-row';
-        }
-        return '';
-      },
-      handleObject(data_center_info_object){
-        for(let key in data_center_info_object){
-          this.data_center_info_list.push({'Column_key':key,'Column_value':data_center_info_object[key]});
-        }
-      }
-    },
-    data() {
-      return {
-        data_center_info_list :[],
-        data_center_info_object:null,
-      }
-    },
+    export default {
+        data() {
+            return {
+                dataCenterInfo:null,
+            };
+        },
+        methods: {
+            getDataCenterInfo(para){
+                 getDataCenterInfoApi(para).then((res) => {
+                    this.dataCenterInfo = res.data.data;
+                });
 
-    mounted() {
-			let d_id = this.$route.query.d_id;
-            this.getDataCenterNode(d_id);
-		},
-  }
+            },
+        },
+        mounted() {
+            this.getDataCenterInfo(this.$route.query);
+        },
+    };
 </script>
+<style scoped>
+    thead th {
+        text-align: center;
+    }
+    td {
+    border: none;
+}
+
+    .left-table th,.left-table  td {
+        /*padding-left: 20px;*/
+        border: 1px solid #e9eaec;
+        line-height: 15px;
+        text-align: center;
+    }
+
+</style>

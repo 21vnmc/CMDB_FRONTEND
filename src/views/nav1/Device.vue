@@ -13,7 +13,7 @@
 					<el-input v-model="filters.via_num" placeholder="资产编号"></el-input>
 				</el-form-item>
 				<el-form-item >
-					<el-select filterable v-model="filters.query_field" placeholder="产品类型"
+					<el-select filterable v-model="filters.query_field" placeholder="搜索类型"
 					@change="changeQueryItem"
 					>
 					<el-option
@@ -25,7 +25,7 @@
 				  </el-select>
 					</el-form-item>
 				<el-form-item >
-					<el-select filterable v-model="filters.field_value" placeholder="硬件类型">
+					<el-select filterable v-model="filters.field_value" placeholder="请选择">
 					<el-option
 					  v-for="item in field_values"
 					  :key="item.id"
