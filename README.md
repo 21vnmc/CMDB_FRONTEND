@@ -87,7 +87,6 @@ Modern browsers and IE 10+.
         this.syncActivePath(); // add this line
       }
     }
-
 //packages/cascader-panel/src/cascader-panel.vue , line at 147.
 
 
@@ -95,6 +94,6 @@ Modern browsers and IE 10+.
       this.clearCheckedNodes(); // add this line
       this.syncCheckedValue();
       this.checkStrictly && this.calculateCheckedNodePaths();
-    },
+    }
 ```
 
