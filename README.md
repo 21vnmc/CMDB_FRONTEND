@@ -56,8 +56,45 @@ Modern browsers and IE 10+.
 # License
 [MIT](http://opensource.org/licenses/MIT)
 
-# Help 
+# Help
 [promise](https://www.jianshu.com/p/67a6cade05f2)
 [permission](https://www.cnblogs.com/xiaochongchong/p/11308770.html)
 [ele-cascader](https://juejin.im/post/5bd90f67e51d452ef37d4541)
 [ele-cascader](https://www.cnblogs.com/yulingjia/p/9789174.html)
+
+# issue
+[el-cascader回显问题](https://www.codenong.com/cs105410935/)
+
+```js
+// packages/cascader-panel/src/cascader-panel.vue , line at 377.
+    clearCheckedNodes: function clearCheckedNodes() {
+      var config = this.config,
+          leafOnly = this.leafOnly;
+      var multiple = config.multiple,
+          emitPath = config.emitPath;
+
+      if (multiple) {
+        this.getCheckedNodes(leafOnly).filter(function (node) {
+          return !node.isDisabled;
+        }).forEach(function (node) {
+          return node.doCheck(false);
+        });
+        this.calculateMultiCheckedValue();
+      } else {
+        this.checkedValue = emitPath ? [] : null;
+         this.activePath = []; // add this line
+        this.calculateCheckedNodePaths(); // add this line
+        this.syncActivePath(); // add this line
+      }
+    }
+
+//packages/cascader-panel/src/cascader-panel.vue , line at 147.
+
+
+    value: function value() {
+      this.clearCheckedNodes(); // add this line
+      this.syncCheckedValue();
+      this.checkStrictly && this.calculateCheckedNodePaths();
+    },
+```
+

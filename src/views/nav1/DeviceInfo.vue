@@ -1,7 +1,7 @@
 <template>
     <div>
-        <div class="left">
-            <table class="left-table" v-if="tableData.length!==0">
+        <div v-if="tableData.length!==0" class="left">
+            <table class="left-table" >
                 <thead>
                 <th height="16px">设备</th>
                 <th >U位</th>
@@ -42,7 +42,7 @@
             </table>
         </div>
 
-        <div class="right">
+        <div :class="tableData.length!==0 ? 'right':'left'">
             <section>
                 <table style="border:thin dashed darkgray;width: 500px">
                     <thead>
