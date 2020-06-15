@@ -3,14 +3,14 @@
             <section>
                 <table style="border:thin dashed darkgray;width:60%">
                     <thead>
-                    <th></th>
-                    <th height="32px" style="font-size:25px;text-align: left" >详情</th>
+                    <th style="font-size:25px;text-align: right">详</th>
+                    <th height="32px" style="font-size:25px;text-align: left">情</th>
                     </thead>
                     <tbody style="border:thin solid darkgray;">
                     <template v-for="(val,key,index) in dataCenterInfo">
                         <tr>
-                            <td align="right" style="font-weight:bold">{{key}}:</td>
-                            <td align="left">{{val}}</td>
+                            <td width="50%" align="right" style="font-weight:bold">{{key}}:</td>
+                            <td width="50%" align="left">{{val}}</td>
                         </tr>
                     </template>
                     </tbody>

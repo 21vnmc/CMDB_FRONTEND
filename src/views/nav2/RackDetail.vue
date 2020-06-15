@@ -1,7 +1,7 @@
 <template>
     <div>
-        <div class="left">
-            <table class="left-table" v-if="tableData.length!==0">
+        <div class="left" v-if="tableData.length!==0">
+            <table class="left-table" >
                 <thead>
                 <th height="16px">设备</th>
                 <th >U位</th>
@@ -42,20 +42,20 @@
             </table>
         </div>
 
-        <div class="right">
+        <div :class="tableData.length!==0 ? 'right':'left'" >
             <section>
                 <table style="border:thin dashed darkgray;width: 500px">
                     <thead>
-                    <th></th>
-                    <th height="32px" style=" font-size:25px;padding-right: 150px" >汇总</th>
+                    <th style=" font-size:25px;text-align: right">汇</th>
+                    <th height="32px" style=" font-size:25px;text-align: left">总</th>
                     </thead>
                     <tbody style="border:thin solid darkgray;">
                     <template v-for="(val,key,index) in rackInfo">
                         <tr>
-                            <td align="right" style="font-weight:bold">{{key}}:</td>
-                            <td align="left" v-if="key==='设备状态' && val==2" style="color:#00FFFF">下线</td>
-                            <td align="left" v-else-if="key==='设备状态' && val==1" style="color:green">在线</td>
-                            <td align="left" v-else>{{val}}</td>
+                            <td width="50%" align="right" style="font-weight:bold">{{key}}:</td>
+                            <td width="50%" align="left" v-if="key==='设备状态' && val==2" style="color:#00FFFF">下线</td>
+                            <td width="50%" align="left" v-else-if="key==='设备状态' && val==1" style="color:green">在线</td>
+                            <td width="50%" align="left" v-else>{{val}}</td>
                         </tr>
                     </template>
                     </tbody>
