@@ -3,6 +3,8 @@ import axios from 'axios';
 axios.defaults.withCredentials = true
 
 let base = 'http://124.250.245.149:8000';
+// let base = 'http://127.0.0.1:8000';
+
 
 export const requestLogin = params => { return axios.post(`${base}/api/login`, params).then(res => res.data); };
 export const getUserList = params => { return axios.get(`${base}/api/user/list`, { params: params }); };
@@ -36,6 +38,8 @@ export const getApartmentInfoApi = params => { return axios.get(`${base}/api/apa
 export const getRackDeviceInfoApi = params => { return axios.get(`${base}/api/dc/getRackDeviceInfo`, { params: params }); };
 export const getApartInfoApi = params => { return axios.get(`${base}/api/dc/getApartInfo`, { params: params }); };
 export const getDataCenterInfoApi = params => { return axios.get(`${base}/api/dc/getDataCenterInfo`, { params: params }); };
+export const getDevicePortApi = params => { return axios.get(`${base}/api/asset/getDevicePort`, { params: params }); };
+export const updateDevicePortApi = params => { return axios.put(`${base}/api/asset/updateDevicePort`, { params: params }); };
 export const getAssetInfoApi = params => { return axios.get(`${base}/api/asset/getAssetInfo`, { params: params }); };
 export const getDeviceTypeListApi = params => { return axios.get(`${base}/api/asset/deviceTypeList`, { params: params }); };
 export const getLocationApi = params => { return axios.get(`${base}/api/asset/getLocation`, { params: params }); };

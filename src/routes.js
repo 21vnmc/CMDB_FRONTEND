@@ -20,6 +20,7 @@ import echarts from './views/charts/echarts.vue'
 import User from './views/nav3/User.vue'
 import Group from './views/nav3/Group.vue'
 import DeviceInfo from "./views/nav1/DeviceInfo";
+import DevicePort from "./views/nav1/DevicePort";
 
 let routes = [
     {
@@ -88,11 +89,21 @@ let routes = [
         iconCls: 'el-icon-message',//图标样式class
         children: [
             // { path: '/main', component: Main, name: '主页' },
-            { path: '/device', component: Device, name: '设备管理' },
+            { path: '/device', component: Device, name: '设备管理' ,title: '设备管理'},
             {
                 path: '/deviceInfo',
                 component: DeviceInfo,
                 name: 'device_info',
+                title: '设备详情',
+                meta: {
+                    roles: ['admin', 'user']
+                },
+                hidden: true
+            },
+            {
+                path: '/devicePort',
+                component: DevicePort,
+                name: 'device_port',
                 meta: {
                     roles: ['admin', 'user']
                 },
@@ -110,7 +121,7 @@ let routes = [
             },
         ],
         meta:{
-            roles:['admin']
+            roles:['admin'],
         }
     },
     {

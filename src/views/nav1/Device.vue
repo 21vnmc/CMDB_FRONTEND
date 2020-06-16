@@ -62,11 +62,26 @@
 			</el-table-column>
 			<el-table-column prop="device_type" label="硬件类型" width="120" sortable>
 			</el-table-column>
-			<el-table-column prop="rack_name" label="机柜名称" width="120" sortable>
+			<el-table-column prop="data_center_name/apart_name/rack_name" label="数据中心/机房/机柜" width="350" sortable>
+				 <template slot-scope="scope">
+					{{scope.row.data_center_name}} /{{scope.row.apart_name != null ? scope.row.apart_name:'空' }}
+					 /{{scope.row.rack_name  == null ? "空":scope.row.rack_name }}
+				</template>
 			</el-table-column>
-			<el-table-column prop="apart_name" label="机房" width="120" sortable>
-			</el-table-column>
-			<el-table-column prop="data_center_name" label="数据中心" width="220" sortable>
+<!--			<el-table-column prop="rack_name" label="机柜名称" width="120" sortable>-->
+<!--			</el-table-column>-->
+<!--			<el-table-column prop="apart_name" label="机房" width="120" sortable>-->
+<!--			</el-table-column>-->
+<!--			<el-table-column prop="data_center_name" label="数据中心" width="220" sortable>-->
+<!--			</el-table-column>-->
+			<el-table-column prop="name" label="设备端口" width="100" sortable>
+				<template slot-scope="scope">
+					<router-link
+							:to="{ name: 'device_port', query: {device_id: scope.row.id } }"
+							target="_self">
+						端口详情
+					</router-link>
+				</template>
 			</el-table-column>
 			<el-table-column label="操作" width="100">
 				<template slot-scope="scope">

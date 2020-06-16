@@ -88,8 +88,7 @@
 			<el-table-column prop="data_center_name/apart_name/rack_name" label="数据中心/机房/机柜" width="350" sortable>
 				 <template slot-scope="scope">
 					{{scope.row.data_center_name}} /{{scope.row.apart_name != null ? scope.row.apart_name:'空' }}
-					 /{{scope.row.rack_name  == null ? "空":scope.row.apart_name }}
-
+					 /{{scope.row.rack_name  == null ? "空":scope.row.rack_name }}
 				</template>
 			</el-table-column>
 
