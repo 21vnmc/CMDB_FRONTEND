@@ -42,10 +42,7 @@
         methods: {
             handleUpdate(){
                 updateDevicePortApi(this.$route.query).then((res) => {
-                    this.devicePortList = res.data.data;
-                    let start =  this.pageSize * (this.currentPage-1);
-                    let end = this.pageSize * this.currentPage;
-                    this.pagePortList = this.devicePortList.slice(start,end);
+					this.getDevicePort(this.$route.query);
                 });
             },
             handleCurrentChange(val){
