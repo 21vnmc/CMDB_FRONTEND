@@ -42,6 +42,17 @@
         methods: {
             handleUpdate(){
                 updateDevicePortApi(this.$route.query).then((res) => {
+                	if(res.data.code == 200){
+                		this.$message({
+							message: '更新成功',
+							type: 'success'
+						});
+					}else{
+						this.$message({
+							message: '更新失败',
+							type: 'error'
+						});
+					}
 					this.getDevicePort(this.$route.query);
                 });
             },

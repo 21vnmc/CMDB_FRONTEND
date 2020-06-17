@@ -58,22 +58,29 @@
 					</router-link>
 				</template>
 			</el-table-column>
-			<el-table-column prop="ip_addr" label="ip地址" width="150" sortable>
-			</el-table-column>
-			<el-table-column prop="device_type" label="硬件类型" width="120" sortable>
+<!--			<el-table-column prop="ip_addr" label="ip地址" width="150" sortable>-->
+<!--			</el-table-column>-->
+			<el-table-column prop="device_type" label="硬件类型" width="100" sortable>
 			</el-table-column>
 			<el-table-column prop="data_center_name/apart_name/rack_name" label="数据中心/机房/机柜" width="350" sortable>
 				 <template slot-scope="scope">
-					{{scope.row.data_center_name}} /{{scope.row.apart_name != null ? scope.row.apart_name:'空' }}
-					 /{{scope.row.rack_name  == null ? "空":scope.row.rack_name }}
+					 <router-link :to="{ name: 'data_center_info', query: { d_id: scope.row.department_id } }" target="_self">
+                       {{scope.row.data_center_name != null ? scope.row.data_center_name:'空'}}
+                    </router-link>/
+					 <router-link :to="{ name: 'apartment_info', query: { a_id: scope.row.apartment_id,d_name:scope.row.data_center_name } }" target="_self">
+                        {{scope.row.apart_name != null ? scope.row.apart_name:'空' }}
+                    </router-link>/
+					 <router-link :to="{ name: 'rack_detail', query: { rack_id: scope.row.rack_id } }" target="_self">
+                        {{scope.row.rack_name  == null ? "空":scope.row.rack_name }}
+                    </router-link>
 				</template>
 			</el-table-column>
 <!--			<el-table-column prop="rack_name" label="机柜名称" width="120" sortable>-->
 <!--			</el-table-column>-->
 <!--			<el-table-column prop="apart_name" label="机房" width="120" sortable>-->
 <!--			</el-table-column>-->
-<!--			<el-table-column prop="data_center_name" label="数据中心" width="220" sortable>-->
-<!--			</el-table-column>-->
+			<el-table-column prop="department_name" label="所属部门" width="220" sortable>
+			</el-table-column>
 			<el-table-column prop="name" label="设备端口" width="100" sortable>
 				<template slot-scope="scope">
 					<router-link
@@ -83,6 +90,7 @@
 					</router-link>
 				</template>
 			</el-table-column>
+
 			<el-table-column label="操作" width="100">
 				<template slot-scope="scope">
 					<el-tooltip class="item" effect="dark" content="修改" placement="top-start">
