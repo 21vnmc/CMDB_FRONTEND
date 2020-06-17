@@ -47,7 +47,7 @@ let routes = [
         component: ApartInfo,
         name: 'relation_apart',
         meta:{
-            roles:['admin','user']
+            roles:['admin','user'],
         },
          hidden: true
     },
@@ -56,7 +56,7 @@ let routes = [
         component: RackInfo,
         name: 'relation_rack',
         meta:{
-            roles:['admin','user']
+            roles:['admin','user'],
         },
          hidden: true
     },
@@ -89,14 +89,15 @@ let routes = [
         iconCls: 'el-icon-message',//图标样式class
         children: [
             // { path: '/main', component: Main, name: '主页' },
-            { path: '/device', component: Device, name: '设备管理' ,title: '设备管理'},
+                { path: '/device', component: Device, name: '设备管理' ,meta:{title: '设备管理'}},
             {
                 path: '/deviceInfo',
                 component: DeviceInfo,
                 name: 'device_info',
                 title: '设备详情',
                 meta: {
-                    roles: ['admin', 'user']
+                    roles: ['admin', 'user'],
+                    title:'设备详情'
                 },
                 hidden: true
             },
@@ -105,23 +106,26 @@ let routes = [
                 component: DevicePort,
                 name: 'device_port',
                 meta: {
-                    roles: ['admin', 'user']
+                    roles: ['admin', 'user'],
+                    title:'设备端口'
                 },
                 hidden: true
             },
-            { path: '/asset', component: Asset, name: '台账管理' },
+            { path: '/asset', component: Asset, name: '台账管理',meta:{title: '台账管理'} },
             {
                 path: '/assetInfo',
                 component: AssetInfo,
                 name: 'asset_info',
                 meta: {
-                    roles: ['admin', 'user']
+                    roles: ['admin', 'user'],
+                    title:'资产详情'
                 },
                 hidden: true
             },
         ],
         meta:{
             roles:['admin'],
+            title:'资产管理'
         }
     },
     {
@@ -130,13 +134,14 @@ let routes = [
         name: '机柜管理',
         iconCls: 'fa fa-id-card-o',
         children: [
-            { path: '/dataCenter', component: DataCenter, name: '数据中心'},
+            { path: '/dataCenter', component: DataCenter, name: '数据中心',meta:{title: '数据中心'}},
             {
                 path: '/dataCenterInfo',
                 component: DataCenterInfo,
                 name: 'data_center_info',
                 meta: {
-                    roles: ['admin', 'user']
+                    roles: ['admin', 'user'],
+                    title: '中心详情'
                 },
                 hidden: true
             },
@@ -145,24 +150,27 @@ let routes = [
                 component: ApartmentInfo,
                 name: 'apartment_info',
                 meta:{
-                    roles:['admin','user']
+                    roles:['admin','user'],
+                    title: '房间详情'
                 },
                  hidden: true
             },
-            { path: '/apartment', component: Apartment, name: '房间列表' },
-            { path: '/rack', component: Rack, name: '机柜列表'},
+            { path: '/apartment', component: Apartment, name: '房间列表',meta:{title: '房间列表'}},
+            { path: '/rack', component: Rack, name: '机柜列表',meta:{title: '机柜列表'}},
             {
                 path: '/rackDetail',
                 component: RackDetail,
                 name: 'rack_detail',
                 meta:{
-                    roles:['admin','user']
+                    roles:['admin','user'],
+                    title: '机柜详情'
                 },
                  hidden: true
             },
         ],
         meta:{
-            roles:['admin','user']
+            roles:['admin','user'],
+            title:'机柜管理'
         }
     },
     {
@@ -171,11 +179,12 @@ let routes = [
         name: '账号管理',
         iconCls: 'fa fa-address-card',
         children: [
-            { path: '/user', component: User, name: '用户管理' },
-            { path: '/group', component: Group, name: '组管理' }
+            { path: '/user', component: User, name: '用户管理',meta:{title: '用户管理'} },
+            { path: '/group', component: Group, name: '组管理',meta:{title: '组管理'} }
         ],
          meta:{
-            roles:['admin','user']
+            roles:['admin','user'],
+             title: '账号管理'
         }
     },
     {
@@ -189,7 +198,7 @@ let routes = [
             { path: '/page6', component: Page6, name: '导航三' }
         ],
          meta:{
-            roles:['admin','user']
+            roles:['admin','user'],
         }
     },
     {

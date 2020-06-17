@@ -53,11 +53,12 @@
 			<section class="content-container">
 				<div class="grid-content bg-purple-light">
 					<el-col :span="24" class="breadcrumb-container">
-<!--						<strong class="title">{{$route.name}}</strong>-->
+						<!--<strong class="title">{{$route.name}}</strong>-->
 						<el-breadcrumb separator="/" class="breadcrumb-inner">
-							<el-breadcrumb-item v-for="item in $route.matched" :key="item.path">
-								{{item.name}}
-							</el-breadcrumb-item>
+							 <el-breadcrumb-item v-for="(item,index) in breadcrumbList" :key="index" :to="{'path': item.path}" >{{item.title}}</el-breadcrumb-item>
+							<!--<el-breadcrumb-item v-for="item in $route.matched" :key="item.path">-->
+							<!--{{item.name}}-->
+							<!--</el-breadcrumb-item>-->
 						</el-breadcrumb>
 					</el-col>
 					<el-col :span="24" class="content-wrapper">
@@ -77,6 +78,7 @@
 	export default {
 		data() {
 			return {
+				 list: [],
 				sysName:'世纪互联',
 				collapsed:false,
 				sysUserName: 'admin',
@@ -94,6 +96,7 @@
 			}
 		},
 		methods: {
+
 			onSubmit() {
 				console.log('submit!');
 			},
@@ -133,6 +136,24 @@
 			}
 		},
 		computed: {
+			breadcrumbList() {
+				let list = [];
+				let matched = this.$route.matched;
+
+				//判断是不是有首页
+				if (this.$route.path == '/main') {
+					return
+				}
+
+				if (this.$route.path != '/main') {
+					list.push({"title": "首页", "path": "/main"})
+				}
+
+				matched.forEach(element => {
+					list.push({"title": element.meta.title, "path": element.path})
+				});
+				return list;
+			},
 			...mapGetters([
 			  'getPermissionRoutes'
 			  // ...
@@ -177,6 +198,9 @@
 			}
 
 		},
+		created() {
+
+    },
 	}
 
 </script>
