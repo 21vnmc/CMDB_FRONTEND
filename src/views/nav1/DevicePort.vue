@@ -7,8 +7,14 @@
           <el-button size="mini" type="primary" @click="handleUpdate">更新</el-button>
 
 
-        <el-table :data="pagePortList" style="width: 100%;">
-            <el-table-column prop="port" label="端口名称" width="300" sortable>
+        <el-table :data="pagePortList" style="width: 100%;" border :show-header="false">
+            <el-table-column prop="td1" width="268" >
+            </el-table-column>
+			<el-table-column prop="td2"  width="270">
+            </el-table-column>
+			<el-table-column prop="td3"  width="270" >
+            </el-table-column>
+			<el-table-column prop="td4"  width="270" >
             </el-table-column>
         </el-table>
 

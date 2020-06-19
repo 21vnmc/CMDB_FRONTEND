@@ -9,6 +9,7 @@ let base = 'http://124.250.245.149:8000';
 export const requestLogin = params => { return axios.post(`${base}/api/login`, params).then(res => res.data); };
 export const getUserList = params => { return axios.get(`${base}/api/user/list`, { params: params }); };
 export const getDeviceListApi = params => { return axios.get(`${base}/api/asset/deviceList`, { params: params }); };
+export const getTotalInfoApi = params => { return axios.get(`${base}/api/asset/totalInfo`, { params: params }); };
 export const getUserListApi = params => { return axios.get(`${base}/api/user/userList`, { params: params }); };
 export const getAssetListApi = params => { return axios.get(`${base}/api/asset/assetList`, { params: params }); };
 export const getDepartmentListApi = params => { return axios.get(`${base}/api/asset/departmentList`, { params: params }); };

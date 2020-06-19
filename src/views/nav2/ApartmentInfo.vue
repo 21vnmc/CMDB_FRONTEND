@@ -26,7 +26,7 @@
                     <template v-for="(item,index) in belongRacks">
                         <tr>
                             <td style="text-align: center">
-                                <a :href="'/rackDetail?r_id='+ item.id">{{item.name}}</a>
+                                <a :href="'/rackDetail?rack_id='+ item.id">{{item.name}}</a>
                             </td>
                         </tr>
                     </template>

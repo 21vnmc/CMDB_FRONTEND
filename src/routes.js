@@ -73,7 +73,7 @@ let routes = [
         path: '/',
         component: Home,
         name: '',
-        iconCls: 'el-icon-menu',
+        iconCls: 'el-icon-s-home',
         leaf: true,//只有一个节点
         children: [
             { path: '/main', component: Main, name: '中心管理' }
@@ -86,10 +86,10 @@ let routes = [
         path: '/',
         component: Home,
         name: '资产管理',
-        iconCls: 'el-icon-message',//图标样式class
+        iconCls: 'el-icon-s-platform',//图标样式class
         children: [
             // { path: '/main', component: Main, name: '主页' },
-                { path: '/device', component: Device, name: '设备管理' ,meta:{title: '设备管理'}},
+                { path: '/device', component: Device, name: '设备管理' ,meta:{title: '设备管理',roles:['admin']}},
             {
                 path: '/deviceInfo',
                 component: DeviceInfo,
@@ -111,7 +111,19 @@ let routes = [
                 },
                 hidden: true
             },
-            { path: '/asset', component: Asset, name: '台账管理',meta:{title: '台账管理'} },
+        ],
+        meta:{
+            roles:['admin','user'],
+            title:'资产管理'
+        }
+    },
+    {
+        path: '/',
+        component: Home,
+        name: '台账管理',
+        iconCls: 'el-icon-s-finance',//图标样式class
+        children: [
+            { path: '/asset', component: Asset, name: '台账管理',meta:{title: '台账管理',roles: ['admin','user']} },
             {
                 path: '/assetInfo',
                 component: AssetInfo,
@@ -125,14 +137,14 @@ let routes = [
         ],
         meta:{
             roles:['admin'],
-            title:'资产管理'
+            title:'台账管理'
         }
     },
     {
         path: '/',
         component: Home,
         name: '机柜管理',
-        iconCls: 'fa fa-id-card-o',
+        iconCls: 'el-icon-menu',
         children: [
             { path: '/dataCenter', component: DataCenter, name: '数据中心',meta:{title: '数据中心'}},
             {
@@ -177,7 +189,7 @@ let routes = [
         path: '/',
         component: Home,
         name: '账号管理',
-        iconCls: 'fa fa-address-card',
+        iconCls: 'el-icon-user',
         children: [
             { path: '/user', component: User, name: '用户管理',meta:{title: '用户管理'} },
             { path: '/group', component: Group, name: '组管理',meta:{title: '组管理'} }
@@ -201,18 +213,18 @@ let routes = [
             roles:['admin','user'],
         }
     },
-    {
-        path: '/',
-        component: Home,
-        name: 'Charts',
-        iconCls: 'fa fa-bar-chart',
-        children: [
-            { path: '/echarts', component: echarts, name: 'echarts' }
-        ],
-        meta:{
-            roles:['admin']
-        }
-    },
+    // {
+    //     path: '/',
+    //     component: Home,
+    //     name: 'Charts',
+    //     iconCls: 'fa fa-bar-chart',
+    //     children: [
+    //         { path: '/echarts', component: echarts, name: 'echarts' }
+    //     ],
+    //     meta:{
+    //         roles:['admin']
+    //     }
+    // },
     {
         path: '*',
         hidden: true,

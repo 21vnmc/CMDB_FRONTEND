@@ -79,7 +79,7 @@
 <!--			</el-table-column>-->
 <!--			<el-table-column prop="apart_name" label="机房" width="120" sortable>-->
 <!--			</el-table-column>-->
-			<el-table-column prop="department_name" label="所属部门" width="220" sortable>
+			<el-table-column prop="department_name" label="所属部门" width="200" sortable>
 			</el-table-column>
 			<el-table-column prop="name" label="设备端口" width="100" sortable>
 				<template slot-scope="scope">
@@ -155,7 +155,7 @@
 
 				<el-row :gutter="20">
 					<el-col :span="12">
-						<el-form-item label="地区">
+						<el-form-item label="地区" prop="area_id">
 							<el-select filterable v-model="editForm.area_id"
 									   placeholder="请选择"
 									   @change="changeAreaItem">
@@ -170,7 +170,7 @@
 					</el-col>
 
 					<el-col :span="12">
-						<el-form-item label="中心">
+						<el-form-item label="中心" prop="data_center_id">
 							<el-select filterable v-model="editForm.data_center_id" placeholder="请选择"
 									   @change="changeDataCenterItem"
 							>
@@ -187,7 +187,7 @@
 
 
 				<el-row :gutter="20">
-					<el-col :span="12"><el-form-item label="机房">
+					<el-col :span="12"><el-form-item label="机房" prop="apartment_id">
 					<el-select filterable v-model="editForm.apartment_id" placeholder="请选择"
 							   @change="changeApartmentItem"
 					>
@@ -199,7 +199,7 @@
 						</el-option>
 					</el-select>
 				</el-form-item></el-col>
-					<el-col :span="12"><el-form-item label="机柜">
+					<el-col :span="12"><el-form-item label="机柜" prop="rack_id">
 					<el-select filterable v-model="editForm.rack_id" placeholder="请选择"
 							   @change="changeRackItem"
 					>
@@ -214,7 +214,8 @@
 				</el-row>
 
 				<el-row :gutter="20">
-					<el-col :span="12"><el-form-item label="位置">
+					<el-col :span="12">
+						<el-form-item label="位置" prop="rack_position">
 					<el-select v-model="editForm.rack_position" placeholder="请选择">
 						<el-option
 								v-for="item in rack_position_list"
@@ -256,7 +257,7 @@
 				</el-row>
 
 
-				<el-form-item label="部门">
+				<el-form-item label="部门" prop="department_id">
 					<el-select filterable v-model="editForm.department_id" placeholder="请选择">
 						<el-option
 								v-for="item in getDepartmentList"
@@ -267,7 +268,7 @@
 					</el-select>
 				</el-form-item>
 
-				<el-form-item label="产品类型">
+				<el-form-item label="产品类型" prop="product_id">
 					<el-select filterable v-model="editForm.product_id" placeholder="请选择">
 						<el-option
 								v-for="item in getProductList"
@@ -534,11 +535,57 @@
 				sels: [],//列表选中列
 				editFormVisible: false,//编辑界面是否显示
 				editLoading: false,
-				editFormRules: {
+			    editFormRules: {
 					name: [
-						{ required: true, message: '设备名称', trigger: 'blur' }
-					]
+						{ required: true, message: '请输入设备名称', trigger: 'blur' }
+					],
+					ip_addr: [
+						{ required: true, message: '请输入IP地址', trigger: 'blur' }
+					],
+					serial_num: [
+						{ required: true, message: '请输入序列号', trigger: 'blur' }
+					],
+					via_num: [
+						{ required: true, message: '请输入资产号', trigger: 'blur' }
+					],
+					product_id: [
+						{ required: true, message: '请输入产品类型', trigger: 'blur',type:'number' }
+					],
+					department_id: [
+						{ required: true, message: '请输入归属部门', trigger: 'blur',type:'number' }
+					],
+					rack_position: [
+						{ required: true, message: '请输入机柜位置', trigger: 'blur',type:'number' }
+					],
+					rack_id: [
+						{ required: true, message: '请选择机柜', trigger: 'blur',type:'number' }
+					],
+					apartment_id: [
+						{ required: true, message: '请输入房间', trigger: 'blur',type:'number' }
+					],
+					data_center_id: [
+						{ required: true, message: '请输入中心', trigger: 'blur',type:'number' }
+					],
+					area_id: [
+						{ required: true, message: '请输入大区', trigger: 'blur',type:'number' }
+					],
+					status: [
+						{ required: true, message: '请输入状态', trigger: 'blur',type:'number' }
+					],
+					unit_size: [
+						{ required: true, message: '请输入设备大小', trigger: 'blur' }
+					],
+					location: [
+						{ required: true,type:'array', message: '请输入具体位置', trigger: 'blur' }
+					],
+					manufacturer_model: [
+						{ required: true,type:'array', message: '请输入厂商型号', trigger: 'blur'}
+					],
+					device_type_id: [
+						{ required: true, message: '请输入设备类型', trigger: 'blur',type:'number' }
+					],
 				},
+
 				//编辑界面数据
 				editForm: {
 					id:'',
@@ -988,6 +1035,7 @@
 				row.location = location;
 				row.manufacturer_model = manufacturer_model;
 				row.rack_position = row.rack_position ? row.rack_position:'空';
+				row.status = parseInt(row.status);
 				this.editForm = Object.assign({}, row);
 				this.origin_editForm = JSON.parse(JSON.stringify(this.editForm));
 			},
