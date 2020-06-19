@@ -1,10 +1,10 @@
 <template>
     <section>
         <!--工具条-->
-<!--		<el-col :span="24" class="toolbar">-->
+		<el-col :span="24" class="toolbar">
 <!--            <el-button type="warning" size="small" @click="handleUpdate">更新</el-button>-->
-<!--		</el-col>-->
-          <el-button size="mini" type="primary" @click="handleUpdate">更新</el-button>
+		</el-col>
+<!--          <el-button size="mini" type="primary" @click="handleUpdate">更新</el-button>-->
 
 
         <el-table :data="pagePortList" style="width: 100%;" border :show-header="false">
@@ -20,6 +20,8 @@
 
     <!--工具条-->
 		<el-col :span="24" class="toolbar">
+			<el-button size="small" type="primary" @click="handleUpdate">更新</el-button>
+
 			<el-pagination
 					layout="prev, pager, next"
                     @current-change="handleCurrentChange"
