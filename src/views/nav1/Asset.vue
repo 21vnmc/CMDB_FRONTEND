@@ -358,6 +358,7 @@
 				<el-button type="primary" @click.native="editSubmit" :loading="editLoading">提交</el-button>
 			</div>
 		</el-dialog>
+
 		<!--新增界面-->
 		<el-dialog  :fullscreen=true title="新增" :visible="addFormVisible" :close-on-click-modal="false"
 		@close="closeAddDialog">
@@ -379,11 +380,17 @@
 				<el-row :gutter="20">
 					<el-col :span="12">
 						<el-form-item label="状态" prop="asset_status_id">
-						<el-radio-group v-model="addForm.asset_status_id">
-							<el-radio class="radio" :label="1">在线</el-radio>
-							<el-radio class="radio" :label="2">下线</el-radio>
-						</el-radio-group>
-					</el-form-item>
+							<el-select filterable v-model="addForm.asset_status_id"
+									   placeholder="请选择"
+									   @change="changeAssetStatusItem">
+								<el-option
+										v-for="item in asset_status_list"
+										:key="item.id"
+										:label="item.name ? item.name:'空'"
+										:value="item.id">
+								</el-option>
+							</el-select>
+						</el-form-item>
 					</el-col>
 					<el-col :span="12">
 						<el-form-item label="是否可盘" prop="is_statistic_asset_id">
