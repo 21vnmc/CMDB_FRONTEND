@@ -64,7 +64,7 @@
 			</el-table-column>
 			<el-table-column prop="data_center_name/apart_name/rack_name" label="数据中心/机房/机柜" width="350" sortable>
 				 <template slot-scope="scope">
-					 <router-link :to="{ name: 'data_center_info', query: { d_id: scope.row.department_id } }" target="_self">
+					 <router-link :to="{ name: 'data_center_info', query: { d_id: scope.row.data_center_id } }" target="_self">
                        {{scope.row.data_center_name != null ? scope.row.data_center_name:'空'}}
                     </router-link>/
 					 <router-link :to="{ name: 'apartment_info', query: { a_id: scope.row.apartment_id,d_name:scope.row.data_center_name } }" target="_self">
