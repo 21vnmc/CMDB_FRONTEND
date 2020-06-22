@@ -732,6 +732,7 @@
 				});
 			},
 			changeAddRackItem(val){
+				this.addForm.rack_position = null;
 				let para = {rack_id: val};
 				getRackPositionApi(para).then((res) => {
 					this.rack_position_list = res.data.data;
