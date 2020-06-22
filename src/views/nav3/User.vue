@@ -8,7 +8,7 @@
 					<el-input v-model="filters.username" placeholder="用户名"></el-input>
 				</el-form-item>
 
-				<el-select filterable v-model="filters.department_id" placeholder="公司名称">
+				<el-select filterable v-model="filters.department_id" placeholder="所属部门">
 					<el-option
 					  v-for="item in department_list"
 					  :key="item.id"
