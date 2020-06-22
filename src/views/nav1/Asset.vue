@@ -151,11 +151,17 @@
 				<el-row :gutter="20">
 					<el-col :span="12">
 						<el-form-item label="状态" prop="asset_status_id">
-						<el-radio-group v-model="editForm.asset_status_id">
-							<el-radio class="radio" :label="1">在线</el-radio>
-							<el-radio class="radio" :label="2">下线</el-radio>
-						</el-radio-group>
-					</el-form-item>
+							<el-select filterable v-model="editForm.asset_status_id"
+									   placeholder="请选择"
+									   @change="changeAssetStatusItem">
+								<el-option
+										v-for="item in asset_status_list"
+										:key="item.id"
+										:label="item.name ? item.name:'空'"
+										:value="item.id">
+								</el-option>
+							</el-select>
+						</el-form-item>
 					</el-col>
 					<el-col :span="12">
 						<el-form-item label="是否可盘" prop="is_statistic_asset_id">
@@ -618,6 +624,7 @@
 				filters: {
 				},
 				area_list:[],
+				asset_status_list:[],
 				data_center_list:[],
 				apartment_list:[],
 				rack_list:[],
@@ -738,6 +745,9 @@
 			}
 		},
 		methods: {
+			changeAssetStatusItem(val){
+
+			},
 			changeQueryItem(val){
 				let para = {database_name:val}
 				queryDataBaseApi(para).then((res) => {
@@ -811,6 +821,13 @@
 				let para = {database_name:'device_type'}
 				queryDataBaseApi(para).then((res) => {
 					this.deviceTypeList({device_type_list: res.data.data});
+				});
+			},
+			getAssetStatus() {
+				let para = {database_name:'asset_status'}
+				queryDataBaseApi(para).then((res) => {
+					// this.deviceTypeList({device_type_list: res.data.data});
+					this.asset_status_list = res.data.data;
 				});
 			},
 			getCompanies(){
@@ -1436,6 +1453,7 @@
 			this.getAreas();
 			this.getProducts();
 			this.getDeviceTypes();
+			this.getAssetStatus();
 			this.getCompanies();
 			this.getAssetNames();
 			this.getUnitSizes();
