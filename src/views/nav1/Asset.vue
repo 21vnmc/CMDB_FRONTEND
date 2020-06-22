@@ -450,9 +450,9 @@
 				</el-row>
 				<el-row :gutter="20">
 					<el-col :span="12">
-						<el-form-item label="地区">
+						<el-form-item label="地区" prop="area_id">
 					<el-select filterable v-model="addForm.area_id" placeholder="请选择"
-							   @change="changeAreaItem"
+							   @change="changeAddAreaItem"
 					>
 						<el-option
 								v-for="item in area_list"
@@ -465,9 +465,9 @@
 				</el-form-item>
 					</el-col>
 					<el-col :span="12">
-						<el-form-item label="中心">
+						<el-form-item label="中心" prop="data_center_id">
                     <el-select filterable v-model="addForm.data_center_id" placeholder="请选择"
-                               @change="changeDataCenterItem"
+                               @change="changeAddDataCenterItem"
                     >
                         <el-option
                                 v-for="item in data_center_list"
@@ -482,9 +482,9 @@
 
 				<el-row :gutter="20">
 					<el-col :span="12">
-						<el-form-item label="机房">
+						<el-form-item label="机房" prop="apartment_id">
                     <el-select filterable v-model="addForm.apartment_id" placeholder="请选择"
-                               @change="changeApartmentItem"
+                               @change="changeAddApartmentItem"
                     >
                         <el-option
                                 v-for="item in apartment_list"
@@ -496,9 +496,9 @@
                 </el-form-item>
 					</el-col>
 					<el-col :span="12">
-						<el-form-item label="机柜">
+						<el-form-item label="机柜" prop="rack_id">
                     <el-select filterable v-model="addForm.rack_id" placeholder="请选择"
-                               @change="changeRackItem"
+                               @change="changeAddRackItem"
                     >
                         <el-option
                                 v-for="item in rack_list"
@@ -746,7 +746,6 @@
 
 				//新增界面数据
 				addForm: {
-
 				}
 
 			}
@@ -791,12 +790,36 @@
 				});
 			},
 			changeRackItem(val){
-				// this.editForm.rack_position = null;
-				// let para = {rack_id: val};
-				// getRackPositionApi(para).then((res) => {
-				// 	this.rack_position_list = res.data.data;
-				// });
-
+			},
+			changeAddAreaItem(val){
+				this.addForm.data_center_id = null;
+				this.addForm.apartment_id = null;
+				this.addForm.rack_id = null;
+				this.apartment_list = [];
+				this.rack_list = [];
+			   	let para = {database_name:'area',primary_key_id:val}
+				queryDataBaseForeignApi(para).then((res) => {
+					this.data_center_list = res.data.data;
+				});
+			},
+			changeAddDataCenterItem(val){
+				this.addForm.apartment_id = null;
+				this.addForm.rack_id = null;
+				this.rack_list = [];
+			   	let para = {database_name:'data_center',primary_key_id:val}
+				queryDataBaseForeignApi(para).then((res) => {
+					this.apartment_list = res.data.data;
+				});
+			},
+			changeAddApartmentItem(val){
+				this.addForm.rack_id = null;
+			   	let para = {database_name:'apartment',primary_key_id:val}
+				queryDataBaseForeignApi(para).then((res) => {
+					this.rack_list = res.data.data;
+				});
+			},
+			changeAddRackItem(val){
+				this.$forceUpdate();
 			},
 			getDepartments() {
 				let para = {database_name:'department'}
