@@ -29,7 +29,7 @@
             <el-table-column prop="name" label="数据中心-房间名称" width="770" sortable>
                 <template slot-scope="scope">
                     <router-link :to="{ name: 'apartment_info', query: { a_id: scope.row.id,d_name:scope.row.data_center_name } }" target="_self">
-                        {{scope.row.data_center_name}}-{{scope.row.name}}
+                        {{ scope.row.data_center_name != null ?scope.row.data_center_name : '空'}}-{{ scope.row.name != null ? scope.row.name:'空'}}
                     </router-link>
                 </template>
             </el-table-column>
