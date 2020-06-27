@@ -557,7 +557,7 @@
 						{ required: true, message: '请输入归属部门', trigger: 'blur',type:'number' }
 					],
 					rack_position: [
-						{ required: true, message: '请输入机柜位置', trigger: 'blur',type:'number' }
+						{ required: true, message: '请输入机柜位置', trigger: 'blur' }
 					],
 					rack_id: [
 						{ required: true, message: '请选择机柜', trigger: 'blur',type:'number' }

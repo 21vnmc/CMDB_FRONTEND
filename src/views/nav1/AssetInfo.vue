@@ -9,10 +9,10 @@
                     <tbody style="border:thin solid darkgray;">
                     <template v-for="(val,key,index) in assetInfo">
                         <tr>
-                            <td align="right" style="font-weight:bold">{{key}}:</td>
-                            <td align="left" v-if="key==='设备状态' && val=='在用'" style="color:#00FFFF">{{val}}</td>
+                            <td align="right" style="font-weight:bold;width: 120px">{{key}}:</td>
+                            <td align="left" v-if="key==='设备状态' && (val=='在用'||val == '在线') " style="color:#00FFFF">{{val}}</td>
                             <td align="left" v-else-if="key==='设备状态' && val=='闲置'" style="color:red">{{val}}</td>
-                            <td align="left" v-else-if="key==='设备状态' && val=='已处置-报废'" style="color:#C80D4F82">{{val}}</td>
+                            <td align="left" v-else-if="key==='设备状态' && val=='报废'" style="color:#C80D4F82">{{val}}</td>
                             <td align="left" v-else>{{val}}</td>
                         </tr>
                     </template>

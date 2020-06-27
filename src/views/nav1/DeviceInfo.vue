@@ -53,7 +53,7 @@
                     <template v-for="(val,key,index) in deviceInfo">
                         <tr>
                             <td align="right" style="font-weight:bold">{{key}}:</td>
-                            <td align="left" v-if="key==='设备状态' && val==2" style="color:#00FFFF">下线</td>
+                            <td align="left" v-if="key==='设备状态' && val==2" style="color:red">下线</td>
                             <td align="left" v-else-if="key==='设备状态' && val==1" style="color:green">在线</td>
                             <td align="left" v-else>{{val}}</td>
                         </tr>
